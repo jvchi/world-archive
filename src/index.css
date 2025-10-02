@@ -1,0 +1,123 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+}
+
+:root{
+  --seasalt:    #F8F9FA;
+  --anti-flash: #E9ECEF;
+  --platinum:   #E1E2E3;
+  --french-gray:#CED4DA;
+  --french-gray2: #ADB5BD;
+  --slate-gray:   #6C757D;
+  --outer-space:  #495057;
+  --Onyx:         #343A40;
+  --Eerie-black:  #212529;
+
+}
+
+ul, body, .image-frame, .details-component, .header, footer, .component-holder{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body{
+  padding: 0;
+  background-color: var(--platinum);
+  height: 100vh;
+  width: 100%;
+  color: var(--seasalt);
+  font-family: Helvetica, sans-serif;
+}
+
+.component{
+  height: 650px;
+  width: 500px;
+  background-color: var(--seasalt);
+  overflow-x: scroll;
+  scrollbar-width: none;
+  flex-direction: column;
+}
+.component-holder{
+  width: 100%;
+}
+
+.header{
+  width: 500px;
+  height: 50px;
+  background-color: blue;
+  font-family: "poppins";
+}
+
+.details-component{
+  width: 300px;
+  flex-direction: row;
+  color: var(--slate-gray);
+  border-bottom: .5px solid var(--anti-flash);
+  padding: 34px;
+}
+
+.image-frame{
+  width: 100px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.image-frame img{
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+.image-frame:hover{
+    cursor: pointer;
+  }
+
+ul{
+  width: 200px;
+  height: 120px;
+  flex-direction: column;
+  align-items: flex-start;
+  
+}
+
+ul li{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  font-size: .6rem;
+  margin-left: -20px;
+  font-weight: 400;
+  line-height: 1.1;
+  padding-bottom: 5px;
+}
+
+ul li span{
+  font-weight: 600;
+  font-size: .62rem;
+  display: inline-block;
+  width: 100%;
+  font-style: italic;
+  opacity: .7;
+}
+
+ul li a{
+  font-size: .5rem;
+  font-weight: 300;
+  color: blue;
+}
+
+footer{
+  position: sticky;
+  width: 500px;
+  height: 20px;
+  background-color: var(--seasalt);
+  color: var(--Eerie-black);
+  font-size: .5rem;
+  bottom: 0;
+  font-weight: 500;
+}
+
+footer a{
+  color: blue;
+}
