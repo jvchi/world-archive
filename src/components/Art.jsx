@@ -1,7 +1,7 @@
 import App from "/src/App.jsx"
 
 
-export default function Component(props){
+export default function Art(props){
   return (
     <>
     <div className="component-holder">

@@ -1,13 +1,14 @@
 import Header from "./components/header.jsx"
-import Component from "./components/component.jsx"
+import Art from "./components/art.jsx"
 import Footer from "./components/footer.jsx"
 import Data from "./components/data.js"
+import Carousel from "./components/Carousel.jsx"
 
 
 
 export default function App(){
   const dataElement = Data.map(data=>{
-    return <Component
+    return <Art
     key= {data.id}
     {...data}
     />
@@ -16,6 +17,7 @@ export default function App(){
     <div className="component">
       <Header/>
       {dataElement}
+      <Carousel/>
       <Footer/>
     </div>
     
