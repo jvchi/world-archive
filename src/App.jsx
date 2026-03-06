@@ -16,7 +16,7 @@ export default function App(){
   return(
     <div className="component">
       <Header/>
-      {dataElement}
+      {/* {dataElement} */}
       <Carousel/>
       <Footer/>
     </div>

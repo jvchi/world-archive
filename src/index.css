@@ -1,4 +1,4 @@
-
+@import 'tailwindcss';
 
 *{
   box-sizing: border-box;
@@ -40,6 +40,7 @@ body{
   overflow-x: scroll;
   scrollbar-width: none;
   flex-direction: column;
+  position: relative;
 }
 .component-holder{
   width: 100%;
@@ -109,20 +110,6 @@ ul li a{
   color: blue;
 }
 
-.carousel-container{
-  min-height: 60px;
-  width: 100%;
-  background-color: red;
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  align-items: center;
-}
-
-.carousel-child{
-  display: flex;
-  flex-direction: row;
-}
 
 footer{
   position: sticky;
