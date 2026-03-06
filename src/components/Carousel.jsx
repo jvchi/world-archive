@@ -49,10 +49,27 @@ export default function () {
     </span>
   ))
 
+  const mainFrame = galleryData[0] && (
+     <div className='bg-green-500 h-max w-max flex flex-col justify-center items-cente'>
+        <img 
+        key=''
+        src={galleryData[0].primaryImage} 
+        alt={galleryData[0].title} 
+        className='max-w-[300px] min-w-[200px] h-fit'
+        />
+       <ul className=''>
+        <li>Vincent</li>
+        <li>{galleryData[0].title}</li>
+        <li>1984</li>
+        <li>museum of art</li>
+       </ul>
+      </div>
+  )
+
   return (
     <div>
-    <section>
-
+    <section className='w-full h-max min-h-[400px] px-8 flex justify-center items-center'>
+      {mainFrame}
     </section>
     <section className='max-h-40 h-30 w-full border text-black absolute bottom-0 flex flex-row gap-2 overflow-x-scroll overflow-y-clip'>
       {galleryElements}
