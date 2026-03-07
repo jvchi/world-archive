@@ -16,6 +16,7 @@
   --outer-space:  #495057;
   --Onyx:         #343A40;
   --Eerie-black:  #212529;
+  --bg-blue: oklch(45.203% 0.3133 264.073);
 
 }
 
@@ -29,6 +30,7 @@
   --color-outer-space:  #495057;
   --color-Onyx:         #343A40;
   --color-Eerie-black:  #212529;
+  --color-blue: oklch(45.203% 0.3133 264.073);
 }
 
 .art-ul, body, .image-frame, .details-component, .header, footer, .component-holder{
@@ -44,6 +46,9 @@ body{
   width: 100%;
   color: var(--seasalt);
   font-family: Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .component{
@@ -64,7 +69,7 @@ body{
 .header{
   width: 500px;
   height: 50px;
-  background-color: blue;
+  background-color: var(--bg-blue);
   font-family: "poppins";
 }
 
@@ -122,7 +127,7 @@ body{
 .art-ul li a{
   font-size: .5rem;
   font-weight: 300;
-  color: blue;
+  color: var(--bg-blue);
 }
 
 
@@ -138,5 +143,5 @@ footer{
 }
 
 footer a{
-  color: blue;
+  color: var(--bg-blue);
 }
