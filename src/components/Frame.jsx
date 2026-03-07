@@ -16,7 +16,7 @@ export default function Frame(props) {
       <img 
       src={activeArt.primaryImage } 
       alt={activeArt.title}
-      className='w-max h-[250px] min-h-[200px] bg-neutral-100' 
+      className='max-w-[300px] h-[250px] min-h-[200px] bg-neutral-100' 
       />
 
       <ul className='max-w-[300px] h-full flex flex-col justify-center place-content-center items-center text-[14px] text-outer-space pt-1 text-center'>
