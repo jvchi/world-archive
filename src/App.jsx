@@ -20,7 +20,8 @@ export default function App(){
   fetch('/api/public/collection/v1/search?q=painting&hasImages=true')
     .then(res => res.json())
     .then(async data => {
-      const first1000 = data.objectIDs.slice(0, 1000)
+    console.log('objectIDs:', data.objectIDs)  // add this
+    const first1000 = data.objectIDs.slice(0, 1000)
       setIDs(first1000)
 
       const first30 = first1000.slice(0, 10)
@@ -76,7 +77,7 @@ export default function App(){
   }, [artDatas])
   
   return(
-    <div className="component scale-75 origin-top sm:scale-100 mx-auto">
+    <div className="component scale-75 sm:scale-100">
       <Header/>
       <Carousel artDatas={artDatas} activeArt={activeArt} setActiveArt={setActiveArt} />
       <Frame data={Data} activeArt={activeArt} IDs={IDs}/>
