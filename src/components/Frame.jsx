@@ -20,10 +20,10 @@ export default function Frame(props) {
       className='w-fit h-[250px] min-h-[200px] bg-neutral-100' 
       />
 
-      <ul className='w-full h-full flex flex-col justify-center items-center text-[14px] text-outer-space'>
-        <li className='font-medium'>{data.title}</li>
-        <li className='text-[12px]'>{data.artist}</li>
-        <li className='font-medium text-[8px] italic'>{data.date}</li>
+      <ul className='w-max h-full flex flex-col justify-center items-center text-[14px] text-outer-space pt-1 text-balance' >
+        <li className='font-medium text-[12px]'>{data.title}</li>
+        <li className='text-[10px] text-neutral-500'>{data.artist}</li>
+        <li className='text-[8px] italic text-neutral-400'>{data.date}</li>
       </ul>
     </div>
   )

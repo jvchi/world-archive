@@ -41,7 +41,7 @@ export default function (props) {
       <img 
       src={data.primaryImage} 
       alt={data.title} 
-      className='min-w-16 h-max border'
+      className='min-w-16 h-max border border-neutral-600'
       />
     </span>
   ))
@@ -51,7 +51,7 @@ export default function (props) {
 
       <span className='w-max h-fit text-Eerie-black opacity-30  text-[8px] italic font-medium p-1 flex text-balance'> → scroll to see more...</span>
 
-      <section className='w-full max-h-40 h-30 border text-black  flex flex-row gap-2 overflow-x-scroll overflow-y-clip scrollbar-hide'>
+      <section className='w-full max-h-40 h-30 border border-neutral-200 text-black  flex flex-row gap-2 overflow-x-scroll overflow-y-clip scrollbar-hide'>
         {galleryElements}
       </section>
 
