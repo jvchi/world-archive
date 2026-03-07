@@ -1,11 +1,10 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
-export default function () {
+export default function (props) {
 
   const [galleryData, setGalleryData] = useState([])
   const [objectIds, setObjectIds] = useState([])
-  const number = false;
 
   useEffect(()=>{
     fetch('https://collectionapi.metmuseum.org/public/collection/v1/search?q=painting&hasImages=true')
@@ -29,10 +28,10 @@ export default function () {
 
         const validImages = artworks.filter(a => a.primaryImage)
         setGalleryData(validImages)
-        console.log(validImages)
       })
-      
   }, [])
+
+  
 
   const galleryElements = galleryData.map(data=>(
    <span 
@@ -44,36 +43,18 @@ export default function () {
       alt={data.title} 
       className='min-w-16 h-max border'
       />
-      {/* <h3>{data.title}</h3>
-      <p>{data.artistDisplayName}</p> */}
     </span>
   ))
 
-  const mainFrame = galleryData[0] && (
-     <div className='bg-green-500 h-max w-max flex flex-col justify-center items-cente'>
-        <img 
-        key=''
-        src={galleryData[0].primaryImage} 
-        alt={galleryData[0].title} 
-        className='max-w-[300px] min-w-[200px] h-fit'
-        />
-       <ul className=''>
-        <li>Vincent</li>
-        <li>{galleryData[0].title}</li>
-        <li>1984</li>
-        <li>museum of art</li>
-       </ul>
-      </div>
-  )
-
   return (
-    <div>
-    <section className='w-full h-max min-h-[400px] px-8 flex justify-center items-center'>
-      {mainFrame}
-    </section>
-    <section className='max-h-40 h-30 w-full border text-black absolute bottom-0 flex flex-row gap-2 overflow-x-scroll overflow-y-clip'>
-      {galleryElements}
-    </section>
+    <div className='absolute bottom-0 left-0 right-0 h-max flex flex-col items-center'>
+
+      <span className='w-max h-fit text-Eerie-black opacity-30  text-[8px] italic font-medium p-1 flex text-balance'> → scroll to see more...</span>
+
+      <section className='w-full max-h-40 h-30 border text-black  flex flex-row gap-2 overflow-x-scroll overflow-y-clip scrollbar-hide'>
+        {galleryElements}
+      </section>
+
     </div>
     
   )

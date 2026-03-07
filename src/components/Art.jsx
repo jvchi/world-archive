@@ -12,7 +12,7 @@ export default function Art(props){
       </div>
       <div>
 
-        <ul>
+        <ul className="art-ul">
           <li className="Artist"><span>Artist</span>{props.artist}</li>
           <li className="Title"><span>Title</span>{props.title}</li>
           <li className="Date"><span>Date</span>{props.date}</li>
