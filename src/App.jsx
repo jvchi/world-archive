@@ -77,7 +77,7 @@ export default function App(){
   }, [artDatas])
   
   return(
-    <div className="component scale-75 sm:scale-100">
+    <div className="component scale-70 sm:scale-100">
       <Header/>
       <Carousel artDatas={artDatas} activeArt={activeArt} setActiveArt={setActiveArt} />
       <Frame data={Data} activeArt={activeArt} IDs={IDs}/>
