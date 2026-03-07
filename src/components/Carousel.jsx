@@ -1,47 +1,19 @@
-import React from 'react'
-import { useState, useEffect, useRef } from 'react'
-
 export default function (props) {
 
-  const [galleryData, setGalleryData] = useState([])
-  const [objectIds, setObjectIds] = useState([])
+  const activeArt = props.activeArt;
+  const setActiveArt = props.setActiveArt;
 
-  useEffect(()=>{
-    fetch('https://collectionapi.metmuseum.org/public/collection/v1/search?q=painting&hasImages=true')
-      .then(res => res.json())
-      .then(id => {
-        const first20 = (id.objectIDs || []).slice(0, 20)
-        setObjectIds(first20)
-
-        return Promise.allSettled(
-          first20.map(objectId =>
-            fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectId}`)
-              .then(res => res.json())
-          )
-        )
-      }, [])
-
-      .then(results => {
-        const artworks = results
-          .filter(r => r.status === "fulfilled")
-          .map(r => r.value)
-
-        const validImages = artworks.filter(a => a.primaryImage)
-        setGalleryData(validImages)
-      })
-  }, [])
-
-  
-
-  const galleryElements = galleryData.map(data=>(
+  const galleryElements = props.artDatas.map(data=>(
    <span 
    key={data.objectID}
-   className='w-max h-full bg-neutral-100'
+   className={'w-max h-full bg-neutral-100'}
    >
       <img 
       src={data.primaryImage} 
       alt={data.title} 
-      className='min-w-16 h-max border border-neutral-600'
+      onClick={()=> setActiveArt(data)}
+      className={`min-w-16 h-max border border-neutral-600`}
+      loading="lazy"
       />
     </span>
   ))
