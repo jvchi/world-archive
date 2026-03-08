@@ -31,7 +31,7 @@ const GalleryItem = ({ data, setActiveArt, setCursorPosition }) => {
         loading="lazy"
         onLoad={()=> setOnLoad(true)}
       />
-      {!onLoad && <div className={`animate pulse w-16 ${skeletonHeight} bg-neutral-200 absolute`}></div>}
+      {!onLoad && <div className={`w-16 ${skeletonHeight} bg-neutral-200 absolute`}></div>}
     </span>
   )
 }

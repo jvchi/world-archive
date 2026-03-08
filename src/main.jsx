@@ -5,7 +5,7 @@ import App from './App.jsx'
 import { div } from 'motion/react-client'
 
 createRoot(document.getElementById('root')).render(
-    <div className='w-[100%] h-min-screen flex justify-center overscroll-none'>
+    <div className='w-[100%] h-min-screen flex justify-center items-center overscroll-none'>
          <App />
     </div>
 )
