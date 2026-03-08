@@ -4,71 +4,45 @@ import Carousel from "./components/Carousel.jsx"
 import Frame from "./components/Frame.jsx"
 import { useState, useEffect} from 'react'
 
-
 export default function App(){
 
   const [activeArt, setActiveArt] = useState(null)
   const [IDs, setIDs] = useState([])
   const [artDatas, setArtDatas] = useState([])
-  const [width, setWidth] = useState(0)
-  console.log(artDatas)
-
-
-  console.log(artDatas.length)
 
   useEffect(() => {
-  fetch('/api/public/collection/v1/search?q=painting&hasImages=true')
-    .then(res => res.json())
-    .then(async data => {
-    console.log('objectIDs:', data.objectIDs)  // add this
-    const first1000 = data.objectIDs.slice(0, 1000)
-      setIDs(first1000)
-
-      const first30 = first1000.slice(0, 10)
-      const rest = first1000.slice(10)
-
-      const initialResults = await Promise.allSettled(
-        first30.map(id =>
-          fetch(`/api/public/collection/v1/objects/${id}`)
-            .then(res => res.json())
-        )
+    const fetchPage = async (page) => {
+      const res = await fetch(
+        `https://api.artic.edu/api/v1/artworks?page=${page}&limit=100&fields=id,title,artist_display,image_id,date_display`
       )
+      const data = await res.json()
+      return data.data
+        .filter(a => a.image_id)
+        .map(a => ({
+          objectID: a.id,
+          title: a.title,
+          artistDisplayName: a.artist_display,
+          objectDate: a.date_display,
+          primaryImageSmall: `https://www.artic.edu/iiif/2/${a.image_id}/full/400,/0/default.jpg`,
+          primaryImage: `https://www.artic.edu/iiif/2/${a.image_id}/full/843,/0/default.jpg`
+        }))
+    }
 
-      const initialArt = initialResults
-        .filter(r => r.status === 'fulfilled')
-        .map(r => r.value)
-        .filter(a => a.primaryImage)
+    const loadArt = async () => {
+      // load first 100 immediately
+      const firstPage = await fetchPage(1)
+      setArtDatas(firstPage)
+      setIDs(firstPage.map(a => a.objectID))
 
-      setArtDatas(initialArt)
-
-      // load rest in batches of 20 with a small delay between batches
-      for (let i = 0; i < rest.length; i += 20) {
-        const batch = rest.slice(i, i + 20)
-
-        const results = await Promise.allSettled(
-          batch.map(id =>
-            fetch(`/api/public/collection/v1/objects/${id}`)
-              .then(res => {
-                if (!res.ok) throw new Error('blocked')
-                return res.json()
-              })
-          )
-        )
-
-        const validBatch = results
-          .filter(r => r.status === 'fulfilled')
-          .map(r => r.value)
-          .filter(a => a.primaryImage)
-
-        if (validBatch.length > 0) {
-          setArtDatas(prev => [...prev, ...validBatch])
-        }
-
-        // small delay to avoid rate limiting
-        await new Promise(resolve => setTimeout(resolve, 50))
+      // load pages 2-10 in the background
+      for (let page = 2; page <= 10; page++) {
+        const moreart = await fetchPage(page)
+        setArtDatas(prev => [...prev, ...moreart])
       }
-    })
-}, [])
+    }
+
+    loadArt()
+  }, [])
 
   useEffect(() => {
     if (artDatas.length > 0 && !activeArt) {
@@ -77,11 +51,10 @@ export default function App(){
   }, [artDatas])
   
   return(
-    <div className="component scale-70 sm:scale-100">
+    <div className="component">
       <Header/>
       <Carousel artDatas={artDatas} activeArt={activeArt} setActiveArt={setActiveArt} />
       <Frame data={Data} activeArt={activeArt} IDs={IDs}/>
     </div>
-    
   )
 }

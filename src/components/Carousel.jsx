@@ -1,8 +1,16 @@
 import { motion } from "motion/react"
+import { span } from "motion/react-client"
 import { useRef, useState } from "react"
 
 const GalleryItem = ({ data, setActiveArt, setCursorPosition }) => {
+
+  const [skeletonHeight] = useState(() => {
+  const heights = ['h-16', 'h-20', 'h-24', 'h-10', 'h-28']
+  return heights[Math.floor(Math.random() * heights.length)]
+})
+  const [onLoad, setOnLoad] = useState(false)
   const ref = useRef(null)
+  const imgRef = useRef(null)
 
   return (
     <span
@@ -16,11 +24,14 @@ const GalleryItem = ({ data, setActiveArt, setCursorPosition }) => {
       className='relative w-max h-full flex flex-col cursor-pointer'
     >
       <img
-        src={data.primaryImage}
+        ref={imgRef}
+        src={data.primaryImageSmall}
         alt={data.title}
-        className='min-w-16 h-max border border-neutral-600 z-10'
+        className={`min-w-16 h-max border border-neutral-600 z-10 ${onLoad ? 'opacity-100' : 'opacity-0'}`}
         loading="lazy"
+        onLoad={()=> setOnLoad(true)}
       />
+      {!onLoad && <div className={`animate pulse w-16 ${skeletonHeight} bg-neutral-200 absolute`}></div>}
     </span>
   )
 }
@@ -29,7 +40,7 @@ const Cursor = ({ position }) => {
   return (
     <motion.span
       animate={{ ...position }}
-      className="absolute bottom-0 top-0 z-0 bg-blue opacity-400"
+      className=" min-w-16 absolute bottom-0 top-0 z-0 bg-blue opacity-400"
     />
   )
 }
